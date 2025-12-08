@@ -1,24 +1,35 @@
 <?php
 include '../koneksi.php';
 
+if (!isset($_GET['id'])) {
+    header("Location: pinjam.php");
+    exit;
+}
+
 $id = $_GET['id'];
 
-$d = mysqli_fetch_assoc(mysqli_query($koneksi,
-    "SELECT * FROM pinjam WHERE pinjam_id='$id'"
-));
+// cek data pinjam
+$q = mysqli_query($koneksi,
+    "SELECT pinjam_id 
+     FROM pinjam 
+     WHERE pinjam_id='$id'"
+);
 
-$kendaraan = $d['kendaraan_nomor'];
+if (!$q || mysqli_num_rows($q) == 0) {
+    header("Location: pinjam.php");
+    exit;
+}
 
-mysqli_query($koneksi, "
-    UPDATE pinjam SET pinjam_status='1'
-    WHERE pinjam_id='$id'
-");
+// update status pinjam saja
+$update = mysqli_query($koneksi,
+    "UPDATE pinjam 
+     SET pinjam_status='1'
+     WHERE pinjam_id='$id'"
+);
 
-mysqli_query($koneksi, "
-    UPDATE kendaraan SET kendaraan_status='1'
-    WHERE kendaraan_nomor='$kendaraan'
-");
-
-echo "<script>alert('Kendaraan telah dikembalikan & status menjadi READY.'); 
-window.location.href='pinjam.php'</script>";
-?>
+if ($update) {
+    header("Location: pinjam.php?kembali=sukses");
+    exit;
+} else {
+    echo "Gagal mengembalikan kendaraan";
+}
