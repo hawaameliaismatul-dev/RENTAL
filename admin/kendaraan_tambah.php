@@ -7,7 +7,7 @@
     <div class="col-md-5 col-md-offset-3">
         <div class="panel">
             <div class="panel-heading">
-                <h4>Tambah Kendaraan Baru</h4>
+                <h4><b>Tambah Kendaraan Baru</b></h4>
             </div>
             <div class="panel-body">
                 <form method="POST" action="kendaraan_aksi.php">

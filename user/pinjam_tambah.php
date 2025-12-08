@@ -7,45 +7,68 @@
     <div class="col-md-5 col-md-offset-3">
         <div class="panel">
             <div class="panel-heading">
-                <h4>Tambah Pinjam</h4>
+                <h4><b>Tambah Data Peminjaman</b></h4>
             </div>
             <div class="panel-body">
+
                 <form method="POST" action="pinjam_aksi.php">
-                    <div class="form-group">
-                        <label>ID Pinjam</label>
-                        <input type="number" name="pinjam_id" class="form-control" placeholder="Masukkan ID Pinjam">
-                    </div>
+
+                    <?php include '../koneksi.php'; ?>
 
                     <div class="form-group">
                         <label>Nomor Kendaraan</label>
-                        <input type="text" name="kendaraan_nomor" class="form-control" placeholder="Masukkan Nomor Kendaraan">
+                        <select name="kendaraan_nomor" class="form-control" required>
+                            <option value="">- Pilih Kendaraan -</option>
+                            <?php
+                                $kendaraan = mysqli_query($koneksi, "SELECT * FROM kendaraan");
+                                while($k = mysqli_fetch_array($kendaraan)){
+                            ?>
+                                <option value="<?php echo $k['kendaraan_nomor']; ?>">
+                                    <?php echo $k['kendaraan_nomor']." - ".$k['kendaraan_nama']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label>ID User</label>
-                        <input type="text" name="user_id" class="form-control" placeholder="Masukkan ID User">
+                        <label>Nama User</label>
+                        <select name="user_id" class="form-control" required>
+                            <option value="">- Pilih User -</option>
+                            <?php
+                                $user = mysqli_query($koneksi, "SELECT * FROM user");
+                                while($u = mysqli_fetch_array($user)){
+                            ?>
+                                <option value="<?php echo $u['user_id']; ?>">
+                                    <?php echo $u['user_nama']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label>Tanggal Pinjam</label>
-                        <input type="date" name="tgl_pinjam" class="form-control">
+                        <input type="date" name="tgl_pinjam" class="form-control" required>
                     </div>
 
                     <div class="form-group">
                         <label>Tanggal Kembali</label>
-                        <input type="date" name="tgl_kembali" class="form-control">
+                        <input type="date" name="tgl_kembali" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Status</label>
+                        <label>Status Peminjaman</label>
                         <select name="pinjam_status" class="form-control" required>
-                            <option value="1">1 (Ready)</option>
-                            <option value="2">2 (Dipinjam)</option>
+                            <option value="">- Pilih Status -</option>
+                            <option value="1">1 (READY)</option>
+                            <option value="2">2 (DIPINJAM)</option>
                         </select>
                     </div>
+
                     <br>
                     <input type="submit" class="btn btn-primary" value="Simpan">
+
                 </form>
+
             </div>
         </div>
     </div>

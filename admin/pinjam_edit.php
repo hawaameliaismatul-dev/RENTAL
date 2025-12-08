@@ -7,7 +7,7 @@
     <div class="col-md-5 col-md-offset-3">
         <div class="panel">
             <div class="panel-heading">
-                <h4>Edit Data Pinjam</h4>
+                <h4><b>Edit Data Pinjam</b></h4>
             </div>
             <div class="panel-body">
 
@@ -24,7 +24,7 @@
 
                     <input type="hidden" name="id_lama" value="<?php echo $d['pinjam_id']; ?>">
 
-                    <div class="form-group">
+                    <div class="form-group"
                         <label>Pilih Kendaraan</label>
                         <select name="kendaraan_nomor" class="form-control">
                             <option value="">-- Pilih Kendaraan --</option>

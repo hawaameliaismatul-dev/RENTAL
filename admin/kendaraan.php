@@ -5,10 +5,10 @@
 <div class="container">
     <div class="panel">
         <div class="panel-heading">
-            <h4>Data Kendaraan</h4>
+            <h4><b>Data Kendaraan</b></h4>
         </div>
         <div class="panel-body">
-            <a href="kendaraan_tambah.php" class="btn btn-sm btn-info pull-right">+Tambah</a>
+            <a href="kendaraan_tambah.php" class="btn btn-sm btn-info pull-right">+ Tambah</a>
             <br><br>
             <table class="table table-bordered table-striped">
                 <tr>

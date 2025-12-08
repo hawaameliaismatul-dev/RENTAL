@@ -5,7 +5,7 @@
 <div class="container">
     <div class="panel">
         <div class="panel-heading">
-            <h4>Data Peminjaman</h4>
+            <h4><b>Data Peminjaman</b></h4>
         </div>
         <div class="panel-body">
             <a href="pinjam_tambah.php" class="btn btn-sm btn-success pull-right">+Tambah</a>

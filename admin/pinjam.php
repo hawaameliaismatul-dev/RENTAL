@@ -5,7 +5,7 @@
 <div class="container">
     <div class="panel">
         <div class="panel-heading">
-            <h4>Data Peminjaman</h4>
+            <h4><b>Data Peminjaman</b></h4>
         </div>
         <div class="panel-body">
             <a href="pinjam_tambah.php" class="btn btn-sm btn-success pull-right">+Tambah</a>
@@ -22,7 +22,7 @@
                 </tr>
                 <?php
                     include '../koneksi.php';
-                    $data = mysqli_query($koneksi,"select * from pinjam ORDER BY tgl_pinjam DESC;");
+                    $data = mysqli_query($koneksi,"select * from pinjam");
                     $no = 1;
                     while ($d=mysqli_fetch_array($data)) {
                 ?>
@@ -44,6 +44,13 @@
                         <td>
                             <a href="pinjam_edit.php?id=<?php echo $d['pinjam_id']; ?>" class="btn btn-sm btn-info Edit">Edit</a>
                             <a href="pinjam_hapus.php?id=<?php echo $d['pinjam_id']; ?>" class="btn btn-sm btn-danger">Batalkan</a>
+                            <?php if($d['pinjam_status'] == '2'){ ?>
+                                
+                            <a href="pinjam_kembali.php?id=<?php echo $d['pinjam_id']; ?>" 
+                                class="btn btn-sm btn-success">Dikembalikan</a>
+                        <?php } ?>
+                    </td>
+                </tr>
                         </td>
                     </tr>
                 <?php

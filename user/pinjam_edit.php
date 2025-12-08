@@ -7,65 +7,84 @@
     <div class="col-md-5 col-md-offset-3">
         <div class="panel">
             <div class="panel-heading">
-                <h4>Edit Pinjam</h4>
+                <h4><b>Edit Data Pinjam</b></h4>
             </div>
             <div class="panel-body">
 
                 <?php
                 include '../koneksi.php';
+
                 $id = $_GET['id'];
-                $data= mysqli_query($koneksi,"select * from pinjam where pinjam_id='$id'");
-                while($d=mysqli_fetch_array($data)) {
-                    ?>
 
-                    <form method="POST" action="pinjam_update.php">
-                        <div class="form-group">
-                            <input type="hidden" name="id_lama" value="<?php echo $d['pinjam_id']; ?>">
+                $data = mysqli_query($koneksi, "SELECT * FROM pinjam WHERE pinjam_id='$id'");
+                $d = mysqli_fetch_array($data);
+                ?>
 
-                            <label>ID Pinjam</label>
-                            <input type="number" class="form-control" name="pinjam_id" 
-                            value="<?php echo $d['pinjam_id']; ?>">
-                        </div>
-                        <div class="form-group">                          
-                            <label>Nomor Kendaraan </label>
-                            <input type="text" class="form-control" name="kendaraan_nomor" 
-                             value="<?php echo $d['kendaraan_nomor']; ?>">
-                        </div>
+                <form method="POST" action="pinjam_update.php">
 
-                        <div class="form-group">
-                            <label>ID User</label>
-                            <input type="text" class="form-control" name="user_id" 
-                             value="<?php echo $d['user_id']; ?>">
-                        </div>
+                    <input type="hidden" name="id_lama" value="<?php echo $d['pinjam_id']; ?>">
 
-                         <div class="form-group">
-                            <label>Tanggal Pinjam</label>
-                            <input type="date" class="form-control" name="tgl_pinjam" 
-                             value="<?php echo $d['tgl_pinjam']; ?>">
-                        </div>
+                    <div class="form-group"
+                        <label>Pilih Kendaraan</label>
+                        <select name="kendaraan_nomor" class="form-control">
+                            <option value="">-- Pilih Kendaraan --</option>
+                            <?php
+                                $kendaraan = mysqli_query($koneksi, "SELECT * FROM kendaraan");
+                                while($k = mysqli_fetch_array($kendaraan)){
+                            ?>
+                                <option 
+                                    value="<?php echo $k['kendaraan_nomor']; ?>"
+                                    <?php if($k['kendaraan_nomor'] == $d['kendaraan_nomor']) echo "selected"; ?>>
 
-                        <div class="form-group">
-                            <label>Tanggal Kembali</label>
-                            <input type="date" class="form-control" name="tgl_kembali" 
-                             value="<?php echo $d['tgl_kembali']; ?>">
-                        </div>
-
-                        <div class="form-group">
-                        <label>Status</label>
-                        <select name="pinjam_status" class="form-control" required>
-                            <option value="1">1 (Ready)</option>
-                            <option value="2">2 (Dipinjam)</option>
+                                    <?php echo $k['kendaraan_nomor']." - ".$k['kendaraan_nama']; ?>
+                                </option>
+                            <?php } ?>
                         </select>
                     </div>
-                    <br/>
 
-                    <input type="submit" class="btn btn-primary" value="Simpan">
+                    <div class="form-group">
+                        <label>Pilih User</label>
+                        <select name="user_id" class="form-control">
+                            <option value="">-- Pilih User --</option>
+                            <?php
+                                $users = mysqli_query($koneksi, "SELECT * FROM user");
+                                while($u = mysqli_fetch_array($users)){
+                            ?>
+                                <option 
+                                    value="<?php echo $u['user_id']; ?>"
+                                    <?php if($u['user_id'] == $d['user_id']) echo "selected"; ?>>
+
+                                    <?php echo $u['user_nama']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tanggal Pinjam</label>
+                        <input type="date" name="tgl_pinjam" class="form-control"
+                               value="<?php echo $d['tgl_pinjam']; ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tanggal Kembali</label>
+                        <input type="date" name="tgl_kembali" class="form-control"
+                               value="<?php echo $d['tgl_kembali']; ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status Pinjam</label>
+                        <select name="pinjam_status" class="form-control">
+                            <option value="1" <?php if($d['pinjam_status'] == 1) echo "selected"; ?>>READY (1)</option>
+                            <option value="2" <?php if($d['pinjam_status'] == 2) echo "selected"; ?>>DIPINJAM (2)</option>
+                        </select>
+                    </div>
+
+                    <br>
+                    <input type="submit" class="btn btn-primary" value="Update">
+
                 </form>
 
-                <?php
-
-                }
-                ?>
             </div>
         </div>
     </div>

@@ -7,14 +7,10 @@
     <div class="col-md-5 col-md-offset-3">
         <div class="panel">
             <div class="panel-heading">
-                <h4>Tambah User Baru</h4>
+                <h4><b>Tambah User Baru</b></h4>
             </div>
             <div class="panel-body">
                 <form method="POST" action="user_aksi.php">
-                    <div class="form-group">
-                        <label> ID User</label>
-                        <input type="text" name="user_id" class="form-control" placeholder="Masukkan ID User">
-                    </div>
                     <div class="form-group">
                         <label>Username</label>
                         <input type="text" name="username" class="form-control" placeholder="Masukkan Username">
